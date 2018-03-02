@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="css/croppie.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+  </head>
+
+  <body>
+    <div id="wrapper">
+    <div id="mainpage" class="ca-mainpage" v-bind:class="{ 'none' : isCropMode }">
+      <div class="ca-functions">
+          <div class="field ca-search">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Search">
+              <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </p>
+          </div>
+          <a class="button ca-add" v-on:click="takeIngredientPhoto">
+              <span class="icon is-small">
+                <i class="fas fa-camera"></i>
+              </span>
+          </a>
+          <form style="display:none" id="ingredientPhotoInputForm">
+            <input v-on:change="ingredientPhotoChanged" id="ingredientPhotoInput" type="file" accept="image/*;capture=camera" style="display:none">
+          </form>
+      </div>
+      <draggable class="ca-ingredients" :list="ingredients" :options="{group:{name:'ingredients'}}">
+          <div v-for="(item, index) in ingredients" :key="item.id">
+            <meal-ingredient :ingredient="item"></meal-ingredient>
+          </div>                 
+      </draggable>
+      <div class="ca-meal">
+        <div class="ca-caloriegoal">
+          <p>{{mealCalorieCount}}/{{calorieTarget}}</p>
+          <p v-if="fillerGrams">+{{fillerGrams}}g</p>
+        </div>
+        <draggable class="ca-mealingredients" :list="mealIngredients" :options="{group:{name:'ingredients'}}">
+          <div v-for="(item, index) in mealIngredients" :key="item.id">
+            <meal-ingredient :ingredient="item" v-bind:is-filler="isFiller(item)" v-on:click.native="toggleFiller(item)"></meal-ingredient>
+          </div>            
+        </draggable>
+      </div>
+      
+      <div class="modal" v-bind:class="{ 'is-active': pendingIngredient }" v-if="pendingIngredient">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <section class="modal-card-body ca-addingredient">
+            <input v-model="pendingIngredient.calorieCount" class="input" type="number" pattern="\d*" placeholder="Calorie count">
+            <input v-model="pendingIngredient.weightInGrams" class="input" type="number" pattern="\d*" placeholder="Weight in grams">
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success" v-on:click="commitAddIngredient">Add</button>
+            <button class="button" v-on:click="cancelAddIngredient">Cancel</button>
+          </footer>
+        </div>
+      </div>      
+    </div>      
+    <div class="ca-cropper" v-bind:class="{ 'none' : !isCropMode }">
+        <div class="ca-cropper-target" id="cropTarget"></div>
+        <div class="ca-cropper-info">
+          <button class="button is-success" v-on:click="acceptCroppedImage">Accept</button>
+          <button class="button" v-on:click="cancelCroppedImage">Cancel</button>
+        </div>
+    </div>    
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="js-external/W.min.js"></script>
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.16.0/vuedraggable.min.js"></script>
+    <script src="js-external/croppie.min.js"></script>
+    <script src="js/script.js"></script>    
+  </body>
+
+</html>

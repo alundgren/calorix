@@ -1,0 +1,106 @@
+/* Styles go here */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.ca-mainpage {
+  display: grid;
+  width: 90vw;
+  height: 80vh;
+  margin:auto;
+  grid-template-areas: "functions functions"
+                       "ingredients meal";
+  grid-column-gap: 5px;
+  grid-row-gap:5px;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr 30%;
+}
+
+.ca-functions {
+  grid-area: functions;
+  display: grid;
+  grid-column-gap:5px;
+  grid-template-rows:1fr;
+  grid-template-columns: 5fr 1fr;
+  /*background-color: #8ca0ff;*/
+}
+
+.ca-ingredients {
+  grid-area: ingredients;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: 100px;
+  /*background-color: #ffa08c;*/
+}
+
+.ca-meal {
+  grid-area: meal;
+  display : grid;
+  grid-row-gap: 5px;
+  grid-template-rows: 50px 1fr;
+  /*background-color: #ffff64;*/
+}
+
+.ca-caloriegoal {
+  /*background-color: green;*/
+  display:grid;
+  border: solid 1px black;
+}
+.ca-caloriegoal p {
+  margin:auto;
+}
+
+.ca-mealfiller {
+  border: solid 1px black;
+}
+
+.ca-mealingredients {
+  /*background-color: orange;*/
+  border: solid 1px black;
+}
+
+.ca-mealingredient {
+  position:relative;
+}
+
+.ca-mealingredient span.ca-counttag {
+  position:absolute;
+  top:0;
+  right:0;  
+}
+
+.ca-mealingredient span.ca-fillertag {
+  position:absolute;
+  bottom:0;
+  right:0;  
+}
+
+.ca-addingredient {
+  display:grid;
+  grid-row-gap:5px;
+  grid-template-rows: 1fr 40px;
+}
+
+.ca-cropper {
+  width: 85vw;
+  height: 85vh;
+  margin:auto;
+  display:grid;
+  grid-gap:5px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 3em;
+  justify-items: center;
+  align-items: center;
+}
+
+.ca-cropper-target {
+  padding-top: 40%;
+}
+
+
+.none {
+  display:none;
+}

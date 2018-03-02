@@ -1,0 +1,1 @@
+Phone/tablet targeted meal preparation app. Use the camera to photograph the basic ingredients you typically use and enter total calories on each. Then pick a filler like pasta or rice and enter both calories and weight on that. Drag ingredients to the right side to make up a meal on mark the filler by clicking it telling you how much of that to use to reach the calorie target.
